@@ -12,6 +12,7 @@ A cross-platform server for the RTS Cossacks 3, intended for use in local area n
 ## Installation
 
 * Windows: Download the latest GitHub [release](https://github.com/ereb-thanatos/cossacks3-lan-server/releases) and follow the instructions in the *readme.txt* file.
+  * **Архив также содержит инструкцию на русском языке (*readme_rus.txt*)**.
 
 * Linux: You will need to compile the server from source. See [below](#compiling) for instructions.
 
