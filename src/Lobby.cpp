@@ -1073,7 +1073,7 @@ void Lobby::process_buf( std::shared_ptr<Client> client )
 			^ nickname
 			1 0h
 			4 int = client score
-			16 0h (unknown / padding)
+			16 0h (reserved / unknown data)
 			1 len
 			^ client properties = pur|%d|dlc|%d|ram|%d
 			^ [players in lobby]
@@ -1084,7 +1084,11 @@ void Lobby::process_buf( std::shared_ptr<Client> client )
 				1 len (optional = 0)
 				^ player score = ps=%d|pw=%d|pg=%d (optional)
 				1 len
-				^ player properties = pur|%d|dlc|%d|ram|%d
+				^ player properties = pur|%d|dlc|%d|ram|%d|... (more variables added)
+				4 int (some number, can be 0)
+				4 int (some small number, can be 0)
+				4 int (some small number, can be 0)
+				16 0h (reserved / unknown data)
 			4 0h (separator)
 			^ [open rooms in reversed order]
 				4 player id of room host
@@ -1101,8 +1105,8 @@ void Lobby::process_buf( std::shared_ptr<Client> client )
 		p.seek_to_start();
 		p.write_byte( 0 );
 		p.write_string( name );
-		p.write_byte( 0 );
-		p.write_int( 0 );//player score
+		p.write_byte( 0 );//score string
+		p.write_int( 0 );
 		p.write_int( 0 );
 		p.write_int( 0 );
 		p.write_int( 0 );
@@ -1118,6 +1122,13 @@ void Lobby::process_buf( std::shared_ptr<Client> client )
 			p.write_string( pl->name() );
 			p.write_byte( 0 );
 			p.write_string( pl->props() );
+			p.write_int( 0 );
+			p.write_int( 0 );
+			p.write_int( 0 );
+			p.write_int( 0 );
+			p.write_int( 0 );
+			p.write_int( 0 );
+			p.write_int( 0 );
 		}
 		p.write_int( 0 );
 		//open rooms, reversed order
