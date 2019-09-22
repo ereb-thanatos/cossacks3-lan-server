@@ -41,7 +41,7 @@ A cross-platform server for the RTS Cossacks 3, intended for use in local area n
 
 * The PC running the server must be reachable on TCP port 31523. Adjust your firewall and router settings accordingly. Turn your firewall off if nothing else helps.
 * The server must be running during the entire game.
-* The server provides room host transition functionality. This means that the game will continue even after the room host leaves. 
+* The server provides room host transition functionality. This means that the game will continue even after the room host leaves.
 * This server adheres to the official server's nickname limitations. Since the game key form field is more permissive, your nickname will be adjusted by the server during login if necessary. The rules are:
   * 4 to 16 characters
   * lowercase and uppercase letters from a to z
@@ -54,8 +54,9 @@ A cross-platform server for the RTS Cossacks 3, intended for use in local area n
 
 To compile, execute the following command in the source code directory:
 
-```
-g++ *cpp -DNDEBUG -I /path/to/asio/include/dir/ -lpthread -o cossacks3-server
+```bash
+$ git submodule update --init --recursive
+$ g++ src/*.cpp -DNDEBUG -I asio/asio/include -lpthread -o cossacks3-server
 ```
 You should be able to compile without *boost*, since *ASIO_STANDALONE* is defined in the headers.
 
